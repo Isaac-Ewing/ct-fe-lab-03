@@ -7,7 +7,7 @@ export const formatStory = (res) =>
     }));
 
 export const getNewsWithQuery = async (query) => {
-    const res = await fetch(`https://newsapi.org/v2/everything?qInTitle=${query}&apiKey=${process.env.NEWS_API_KEY}`);
+    const res = await fetch(`http://newsapi.org/v2/everything?qInTitle=${query}&apiKey=${process.env.NEWS_API_KEY}`);
     const json = await res.json();
     return formatStory(json);
 }
