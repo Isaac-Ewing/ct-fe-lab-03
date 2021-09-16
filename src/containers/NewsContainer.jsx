@@ -5,35 +5,35 @@ import { getNews, getNewsWithQuery } from '../services/newsAPI';
 
 export default class NewsContainer extends Component {
     state = {
-        query: '',
-        loading: true,
-        stories: []
+      query: '',
+      loading: false,
+      stories: []
     };
 
     async componentDidMount() {
-        this.setState({ loading: false });
+      this.setState({ loading: false });
     }
 
     handleQueryChange = (event) => {
-        this.setState({ query: event.target.value });
+      this.setState({ query: event.target.value });
     }
 
     handleSubmit = async (event) => {
-        event.preventDefault();
-        this.setState({ loading: true });
-        const stories = await getNewsWithQuery(this.state.query);
-        this.setState({ stories, loading: false });
+      event.preventDefault();
+      this.setState({ loading: true });
+      const stories = await getNewsWithQuery(this.state.query);
+      this.setState({ stories, loading: false });
     };
 
     render() {
-        if(this.state.loading) 
-            return (<p>Loading!</p>);
+      if(this.state.loading) 
+        return (<p>Loading!</p>);
 
-        return (
-            <>
-               <Submit query={this.state.query} handleChange={this.handleQueryChange} onSubmit={this.handleSubmit} />
-               <StoryList stories={this.state.query ? this.state.stories : []} /> <></>
-            </>
-        );
+      return (
+        <>
+          <Submit query={this.state.query} handleChange={this.handleQueryChange} onSubmit={this.handleSubmit} />
+          <StoryList stories={this.state.stories} /> <></>
+        </>
+      );
     }
 }
