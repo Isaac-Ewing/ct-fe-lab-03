@@ -8,25 +8,25 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 
-// const server = setupServer(
-//   rest.get(
-//     'https://newsapi.org/v2/everything',
-//     (req, res, ctx) => {
-//       return res(
-//         ctx.json({ articles: [{
-//           title: 'Everything is going wrong',
-//           author: 'most people',
-//           description: 'title says it all'
-//         }]
-//         })
-//       );
-//     }
-//   )
-// );
+const server = setupServer(
+  rest.get(
+    'https://newsapi.org/v2/everything',
+    (req, res, ctx) => {
+      return res(
+        ctx.json({ articles: [{
+          title: 'Everything is going wrong',
+          author: 'most people',
+          description: 'title says it all'
+        }]
+        })
+      );
+    }
+  )
+);
 
 describe('ArticlesContainer', () => {
-//   beforeAll(() => server.listen());
-//   afterAll(() => server.close());
+  beforeAll(() => server.listen());
+  afterAll(() => server.close());
 
   it('should display a list of news articles', async () => {
     render(<NewsContainer />);
